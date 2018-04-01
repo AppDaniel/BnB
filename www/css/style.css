@@ -1,1 +1,22 @@
-/* Empty. Add your own CSS if you like */
+.bgHome{
+    background: url("../img/startpg.jpg") no-repeat center center fixed;
+    background-size: cover;
+  }
+  .bgRooms{
+    background: url("../img/startpg.jpg") no-repeat center center fixed;
+    background-size: cover;
+  }
+  .bgRooms2{
+    background: none;
+    background-size: cover;
+  }
+  
+
+  .branding{
+    width: 50%;
+    max-width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

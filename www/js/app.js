@@ -1,24 +1,64 @@
-// Ionic Starter App
+angular.module('bnb', ['ionic'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+// Lägg till denna metod för att visa flikarna längst ner på Android.
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.platform.android.tabs.position("bottom");
+ })
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+.config(function($stateProvider, $urlRouterProvider){
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+$stateProvider
+.state("tabs" , {
+  url : "/tab" ,
+  abstract:true,
+  templateUrl : "templates/tabs.html"
 })
+
+.state("tabs.home" , {
+  url : "/home" ,
+  views : {
+    "home-tab" : {
+      templateUrl : "templates/home.html"
+    }
+  }
+})
+
+.state("tabs.rooms" , {
+  url : "/rooms" ,
+  views : {
+    "rooms-tab" : {
+      controller : "apiCtlr",
+      templateUrl: "templates/rooms.html"
+    }
+  }
+})
+
+  $urlRouterProvider.otherwise("/tab/home");
+})
+
+.controller("apiCtlr",function($scope, $http, $stateParams){
+
+
+  $http({
+    method: "GET", 
+    url: "http://appdaniel.com/hotel/",
+    
+    params: {}
+  
+  }).then(function mySuccess(response) {
+      // a string, or an object, carrying the response from the server.
+      $scope.rooms = response.data;
+      $scope.statuscheck = response.status;
+  
+     /* Denna används för att kolla upp vilket rum  man trycker på, nästa steg
+     $scope.aRoom = $scope.rooms.find(function(item){
+        console.log(item.room_ID)
+       $scope.roomToShow = $stateParams.ID;
+        return item.id == $stateParams.ID; 
+      })*/
+  
+    }, function myError(response) {
+      $scope.rooms = response.statusText;
+  });
+  
+  })

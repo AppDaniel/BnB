@@ -40,6 +40,14 @@ $stateProvider
     }
   }
 })
+.state("tabs.room", {
+  url : "/rooms/:aID",
+  views :{
+    "list-tab" : {
+      templateUrl : "templates/room.html"
+    }
+  }
+})
 
   $urlRouterProvider.otherwise("/tab/home");
 })

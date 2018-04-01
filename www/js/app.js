@@ -32,6 +32,14 @@ $stateProvider
     }
   }
 })
+.state("tabs.info" , {
+  url : "/info" ,
+  views : {
+    "info-tab" : {
+      templateUrl: "templates/info.html"
+    }
+  }
+})
 
   $urlRouterProvider.otherwise("/tab/home");
 })

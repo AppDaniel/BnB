@@ -41,9 +41,10 @@ $stateProvider
   }
 })
 .state("tabs.room", {
-  url : "/rooms/:aID",
+  url : "/rooms/:ID",
   views :{
-    "list-tab" : {
+    "rooms-tab" : {
+      controller : "apiCtlr",
       templateUrl : "templates/room.html"
     }
   }
@@ -52,7 +53,7 @@ $stateProvider
   $urlRouterProvider.otherwise("/tab/home");
 })
 
-.controller("apiCtlr",function($scope, $http, $stateParams){
+.controller("apiCtlr",function($scope, $http, $state, $rootScope){
 
 
   $http({
@@ -66,12 +67,12 @@ $stateProvider
       $scope.rooms = response.data;
       $scope.statuscheck = response.status;
   
-     /* Denna används för att kolla upp vilket rum  man trycker på, nästa steg
-     $scope.aRoom = $scope.rooms.find(function(item){
-        console.log(item.room_ID)
-       $scope.roomToShow = $stateParams.ID;
-        return item.id == $stateParams.ID; 
-      })*/
+     // Denna används för att kolla upp vilket rum  man trycker på, nästa steg
+    // $scope.aRoom = $scope.rooms.find(function(item){
+    //    console.log(item.id)
+       $scope.roomToShow = $state.params.ID;
+      //  return item.id == $stateParams.ID; 
+      //})
   
     }, function myError(response) {
       $scope.rooms = response.statusText;

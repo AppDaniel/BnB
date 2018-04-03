@@ -1,5 +1,22 @@
-<ion-view view-title="{{room.name}}" >
+<ion-view  view-title="{{room.name}}" >
     <ion-content  class="bgRooms">
-        <h2>Hej</h2>       
+        <ion-item ng-repeat="room in rooms| filter : { id : roomToShow}">
+        <div class="list card">
+                <div class="item item-avatar
+                ">
+                    <img src="{{room.image}}">
+                    <h2>{{room.name}}</h2>
+                    <p>{{room.about}}</p>
+                </div>
+                <div class="item item-image">
+                    <img src="{{room.image}}">
+                </div>
+                <div class="item item-icon-left assertive">
+                    <i class="icon ion-ios-person"></i>
+                    {{room.price}}kr/night
+                </div>
+              </div>
+              </ion-item>
+           
 </ion-content>
 </ion-view>

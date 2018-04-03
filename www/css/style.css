@@ -19,4 +19,12 @@
     text-align: center;
     margin-top: 20px;
   }
-  
+  .error{
+    color: red;
+}
+.roomdes{
+  text-align: center;
+}
+.buttoncard{
+  background: #387ef5;
+}

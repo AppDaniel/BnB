@@ -1,21 +1,60 @@
-<ion-view  view-title="{{room.name}}" >
-    <ion-content  class="bgRooms">
+<ion-view  view-title="Room" >
+    <ion-content>
         <ion-item ng-repeat="room in rooms| filter : { id : roomToShow}">
-        <div class="list card">
-                <div class="item item-avatar
-                ">
-                    <img src="{{room.image}}">
-                    <h2>{{room.name}}</h2>
-                    <p>{{room.about}}</p>
-                </div>
+    
+                <br>
+                    <h2 class="roomdes">{{room.name}}</h2>
+                    <br>
+                    <hr>
                 <div class="item item-image">
                     <img src="{{room.image}}">
                 </div>
-                <div class="item item-icon-left assertive">
-                    <i class="icon ion-ios-person"></i>
-                    {{room.price}}kr/night
-                </div>
+                <br>
+                <p>{{room.about}}</p>
               </div>
+            
+              <br>
+              <form name="myForm" ng-submit="submit()">
+
+                    <span class="input-label">Check In / Check out date</span>
+                    <label class="item item-input">
+                            <input type="date" name="checkIn"
+                            ng-model="data.checkIn" required>
+                            <input type="date" name="checkOut"
+                            ng-model="data.checkOut" required>
+                          </label>
+                          <br>  
+
+
+                    <label class="item item-input">
+                      <span class="input-label">Name</span>
+                      <input class="" type="text" name="name" placeholder="First name" 
+                      ng-model="data.name" required>
+                    <input class="" type="text" name="last" placeholder="Last name" 
+                    ng-model="data.lastname" required>
+                </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Email</span>
+                        <input type="email" name="email" placeholder="Email"
+                        ng-model="data.email" required>
+                        <div ng-show="myForm.email.$error.email" class="error">Ange en giltig e-postadress</div>
+                      </label>       
+
+                       <label class="item item-input item-stacked-label">
+                            <span class="input-label">Phone</span>
+                            <input type="number" name="tel" placeholder="Phone Number"
+                            ng-model="data.phone" required>
+                          </label>
+
+
+                  
+          
+                        </form>
+                        
+                            <input type="submit" value="Book" class="button button-block button-positive">
+                        
+                        
               </ion-item>
            
 </ion-content>

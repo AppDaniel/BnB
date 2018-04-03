@@ -1,22 +1,22 @@
-<ion-view view-title="Rooms" >
+<ion-view view-title="All Rooms" >
             <ion-content>
-                    <ion-item href="#/tab/rooms/{{room.id}}"  ng-repeat="room in rooms">
+                    <ion-item ng-repeat="room in rooms">
            <div class="list card">
                     <div  class="item item-avatar
                     ">
-                        <img  src="{{room.image}}">
+                        <img src="{{room.image}}">
                         <h2>{{room.name}}</h2>
                         <p>{{room.about}}</p>
                     </div>
-                    <div  class="item item-image">
+                    <div class="item item-image">
                         <img src="{{room.image}}">
                     </div>
-                    <div class="item item-icon-left assertive">
-                        <i class="icon ion-ios-person"></i>
-                        {{room.price}}kr/night
-                        
-                    </div>
-                  </div>
+                    <div class="card buttoncard">
+                        <a href="#/tab/rooms/{{room.id}}" type="button" 
+                        class="button button-block button-positive">{{room.price}}kr/night</a>
+                
+                    </div>   
+                 </div>
                 </ion-item>             
     </ion-content>
 </ion-view>

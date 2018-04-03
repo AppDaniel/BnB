@@ -41,7 +41,7 @@ $stateProvider
   }
 })
 .state("tabs.room", {
-  url : "/rooms/:ID",
+  url : "/rooms/:sendID",
   views :{
     "rooms-tab" : {
       controller : "apiCtlr",
@@ -70,7 +70,7 @@ $stateProvider
      // Denna används för att kolla upp vilket rum  man trycker på, nästa steg
     // $scope.aRoom = $scope.rooms.find(function(item){
     //    console.log(item.id)
-       $scope.roomToShow = $state.params.ID;
+       $scope.roomToShow = $state.params.sendID;
       //  return item.id == $stateParams.ID; 
       //})
   

@@ -57,7 +57,8 @@ $stateProvider
 
 
   
-  $scope.data = {};
+  $scope.data = {
+  };
   
   $scope.submit = function(){
     

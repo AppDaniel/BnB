@@ -1,7 +1,7 @@
 <ion-view view-title="All Rooms" >
-            <ion-content>
+    <ion-content class="bgRooms">
+        <div class="list card">
                     <ion-item ng-repeat="room in rooms">
-           <div class="list card">
                     <div  class="item item-avatar
                     ">
                         <img src="{{room.image}}">
@@ -16,7 +16,7 @@
                         class="button button-block button-positive">{{room.price}}kr/night</a>
                 
                     </div>   
-                 </div>
                 </ion-item>             
+            </div>
     </ion-content>
 </ion-view>

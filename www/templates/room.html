@@ -22,8 +22,8 @@
 
                     <span class="input-label">Check In / Check out date</span>
                     <label class="item item-input">
-                        <input type="date" name="checkin" min="{{today | date:'yyyy-MM-dd'}}" ng-model="data.checkin" required>
-                        <input type="date" name="checkout" min="{{data.checkin | date:'yyyy-MM-dd'}}" ng-model="data.checkout" required ng-disabled="myForm.checkin.$invalid">
+                        <input type="date" name="checkin" min="{{today | date:'yyyy-MM-dd'}}" ng-model="data.checkin" ng-model-options="{timezone: 'UTC'}" required>
+                        <input type="date" name="checkout" min="{{data.checkin | date:'yyyy-MM-dd'}}" ng-model="data.checkout" ng-model-options="{timezone: 'UTC'}" required ng-disabled="myForm.checkin.$invalid">
                     </label>
                     <div ng-hide="myForm.checkout.$invalid" class="item item-room">
 
@@ -58,34 +58,32 @@
                         <div class="input-label">Adult</div>
 
 
-                        <select name="adult" ng-model="data.adult">
+                        <select name="adult" ng-model="data.adult" required>
 
                             <option value="1" >1</option>
                             <option ng-show="{{room.maxvisitor}} > 1" value="2">2</option>
-                            <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
-                            <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
                             <select>
 
                     </label>
-                    <h2>You selected: {{data.adult}}</h2>
+                    <!-- 
+                        <h2>You selected: {{data.adult}}</h2>
                     <h2>Maxvisitor : {{room.maxvisitor}}</h2>
                     <h2>{{room.maxvisitor-data.adult}}</h2>
                     <h2>{{maxChild(room.maxvisitor, data.adult)}}</h2>
-                    <h2>{{childToReturn}}</h2>
+                    <h2>{{childToReturn}}</h2>-->
 
-                    <label  ng-show="{{room.maxvisitor}} > 1" class="item item-input item-select">
+                    <label  ng-show="{{room.maxvisitor}} > 2" class="item item-input item-select">
                         <div class="input-label">Child</div>
                      <select name="child" ng-model="data.child">
                             <option value="0">0</option>
-                            <option ng-show="{{room.maxvisitor}} > 1" value="1">1</option>
-                            <option ng-show="{{room.maxvisitor}} === 5" value="2">2</option>
-                            <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
-                            <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
+                            <option ng-show="{{room.maxvisitor}} > 2" value="1">1</option>
+                            <option ng-show="{{room.maxvisitor}} > 2" value="2">2</option>
+                            <option ng-show="{{room.maxvisitor}} > 2" value="3">3</option>
                         </select>
                     </label>
-                    <p>summan : {{data.adult + data.child}} </p>
+                    
 
-                    <input type="submit" value="Book" class="button button-block button-positive">
+                    <input ng-hide="myForm.$invalid" type="submit" value="Book" class="button button-block button-positive">
 
                 </form>
             </ion-item>

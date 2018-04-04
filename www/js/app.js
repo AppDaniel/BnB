@@ -53,14 +53,19 @@ $stateProvider
   $urlRouterProvider.otherwise("/tab/home");
 })
 
-.controller("apiCtlr",function($scope, $http, $state, $rootScope){
+.controller("apiCtlr",function($scope, $http, $state, $ionicModal){
+
+
 
 
   
   $scope.data = {
+    adult: 1,
+    child : 0
   };
   
   $scope.submit = function(){
+    
     
     var url = "http://appdaniel.com/hotel/booking/index.php";
     
@@ -78,6 +83,7 @@ $stateProvider
     url: "http://appdaniel.com/hotel/",
     
     params: {}
+    
     
   }).then(function mySuccess(response) {
     // a string, or an object, carrying the response from the server.
@@ -101,6 +107,10 @@ $stateProvider
       var arravial = new Date(arravial);
       var depature = new Date(depature);
       var countdays = Math.abs(depature.getTime() - arravial.getTime());
+
+   		        
+      $scope.datePrettyIn = arravial.toLocaleDateString();
+      $scope.datePrettyOut = depature.toLocaleDateString();
       
       $scope.dayDiff = Math.ceil(countdays / (1000 * 3600 * 24));
       if($scope.dayDiff == 0){
@@ -128,6 +138,46 @@ $stateProvider
 
     };
 
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+      // Execute action
+    });
+  })
+
+  .run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      if(window.cordova && window.cordova.plugins.Keyboard) {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
   
-    
+        // Don't remove this line unless you know what you are doing. It stops the viewport
+        // from snapping when text inputs are focused. Ionic handles this internally for
+        // a much nicer keyboard experience.
+        cordova.plugins.Keyboard.disableScroll(true);
+      }
+      if(window.StatusBar) {
+        StatusBar.styleDefault();
+      }
+    });
   })

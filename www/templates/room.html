@@ -60,9 +60,9 @@
 
                         <select name="adult" ng-model="data.adult" required>
 
-                            <option value="1" >1</option>
-                            <option ng-show="{{room.maxvisitor}} > 1" value="2">2</option>
-                            <select>
+                            <option name="adult" value="1" >1</option>
+                            <option name="adult" ng-show="{{room.maxvisitor}} > 1" value="2">2</option>
+                            <select> 
 
                     </label>
                     <!-- 
@@ -75,17 +75,19 @@
                     <label  ng-show="{{room.maxvisitor}} > 2" class="item item-input item-select">
                         <div class="input-label">Child</div>
                      <select name="child" ng-model="data.child">
-                            <option value="0">0</option>
-                            <option ng-show="{{room.maxvisitor}} > 2" value="1">1</option>
-                            <option ng-show="{{room.maxvisitor}} > 2" value="2">2</option>
-                            <option ng-show="{{room.maxvisitor}} > 2" value="3">3</option>
+                            <option name="child" value="0">0</option>
+                            <option name="child" ng-show="{{room.maxvisitor}} > 2" value="1">1</option>
+                            <option name="child" ng-show="{{room.maxvisitor}} > 2" value="2">2</option>
+                            <option name="child" ng-show="{{room.maxvisitor}} > 2" value="3">3</option>
                         </select>
                     </label>
                     
 
-                    <input ng-hide="myForm.$invalid" type="submit" value="Book" class="button button-block button-positive">
-
+                    <input ng-hide="myForm.$invalid" ng-click="modal.show()"type="submit" value="Book" 
+                    class="button button-block button-positive">
                 </form>
+
+                
             </ion-item>
     </ion-content>
 </ion-view>

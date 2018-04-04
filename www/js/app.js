@@ -94,7 +94,7 @@ $stateProvider
       $scope.rooms = response.statusText;
     });
     
-    
+    $scope.today = new Date()
     
     $scope.nights = function(arravial, depature){
       var arravial = new Date(arravial);
@@ -110,7 +110,6 @@ $stateProvider
       
     }
     
-    //Räkna ut totalpris
     $scope.totalPrice = function(price, nights){
       var price;
       var nights;
@@ -118,6 +117,15 @@ $stateProvider
       
       return $scope.priceToReturn;
     }
+
+    $scope.maxChild = function(maxVisitor, adult){
+      var adult;
+      var maxVisitor;
+      $scope.childToReturn = maxVisitor - adult;
+
+      return $scope.childToReturn;
+
+    };
 
   
     

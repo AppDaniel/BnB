@@ -1,114 +1,93 @@
-<ion-view  view-title="Room" >
+<ion-view view-title="Room">
     <ion-content>
-            <form name="myForm" ng-submit="submit()">
-        <ion-item ng-repeat="room in rooms| filter : { id : roomToShow}">
-    
+        <form name="myForm" ng-submit="submit()">
+            <ion-item ng-repeat="room in rooms| filter : { id : roomToShow}">
+
                 <br>
-                    <h2 class="roomtype" ng-model="data.name"> {{room.name}}</h2>
-                    <br>
-                    <hr>
+                <h2 class="roomtype" ng-model="data.name">{{room.name}}</h2>
+                <input type="hidden" ng-value="data.roomtype='{{room.name}}'" ng-model="data.roomtype" name="roomtype" disabled>
+                <br>
+                <hr>
                 <div class="item item-image">
                     <img src="{{room.image}}">
                 </div>
                 <br>
                 <p>{{room.about}}</p>
-              </div>
-            
-              <br>  
-     
+                </div>
 
-              <form name="myForm" ng-submit="submit()">
+                <br>
+
+
+                <form name="myForm" ng-submit="submit()">
 
                     <span class="input-label">Check In / Check out date</span>
                     <label class="item item-input">
-                            <input type="date" name="checkin" min="{{today | date:'yyyy-MM-dd'}}"
-                            ng-model="data.checkin" required>
-                            <input type="date" name="checkout" min="{{data.checkin | date:'yyyy-MM-dd'}}"
-                            ng-model="data.checkout" required
-                            ng-disabled="myForm.checkin.$invalid">
-                          </label>
-                          <div ng-hide="myForm.checkout.$invalid" class="item item-room">                    
-                                Total price :
-                                    <p>{{totalPrice(room.price, nights(data.checkin, data.checkout))}}</p>
-                                    
-                                    
-                                    <input type="number" ng-value="data.totalprice=priceToReturn"
-                                     ng-model="data.totalprice" name="totalprice"disabled>
-                                    <p>Nights : {{nights(data.checkin, data.checkout)}}</p>
-                              </div>
-                              
-                          <br>  
+                        <input type="date" name="checkin" min="{{today | date:'yyyy-MM-dd'}}" ng-model="data.checkin" required>
+                        <input type="date" name="checkout" min="{{data.checkin | date:'yyyy-MM-dd'}}" ng-model="data.checkout" required ng-disabled="myForm.checkin.$invalid">
+                    </label>
+                    <div ng-hide="myForm.checkout.$invalid" class="item item-room">
+
+                        <p> Nights : {{nights(data.checkin, data.checkout)}}</p>
+                        <p> Total price : {{totalPrice(room.price, nights(data.checkin, data.checkout))}}</p>
 
 
-                  <label class="item item-input">
-                      <span class="input-label">Name</span>
-                      <input class="date" type="text" name="name" placeholder="First name" 
-                      ng-model="data.name" required>
-                    <input class="date" type="text" name="lastname" placeholder="Last name" 
-                    ng-model="data.lastname" required>
-                </label>
+                        <input type="hidden" ng-value="data.totalprice=priceToReturn" ng-model="data.totalprice" name="totalprice" disabled>
+                    </div>
 
-                     <label class="item item-input item-stacked-label">
+                    <br>
+
+
+                    <label class="item item-input">
+                        <span class="input-label">Name</span>
+                        <input class="date" type="text" name="name" placeholder="First name" ng-model="data.name" required>
+                        <input class="date" type="text" name="lastname" placeholder="Last name" ng-model="data.lastname" required>
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
                         <span class="input-label">Email</span>
-                        <input  class="date" type="email" name="email" placeholder="Email"
-                        ng-model="data.email" required>
+                        <input class="date" type="email" name="email" placeholder="Email" ng-model="data.email" required>
                         <div ng-show="myForm.email.$error.email" class="error">Ange en giltig e-postadress</div>
-                      </label>       
+                    </label>
 
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Phone</span>
-                            <input class="date" type="tel" name="tel" placeholder="Phone Number"
-                            ng-model="data.phone" required>
-                          </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Phone</span>
+                        <input class="date" type="tel" name="tel" placeholder="Phone Number" ng-model="data.phone" required>
+                    </label>
 
-                        <!--<label class="item item-input item-stacked-label">
-                                <span class="input-label">Room</span>
-                                <input class="date" type="text" name="roomtype" ng-model="data.roomtype"
-                                required>
-                              </label>-->
-                        
-                             <label class="item item-input item-select" >
-                                    <div class="input-label">Adult</div>
-                                    
-                        
-                                    <select name="adult" ng-model="data.adult">
-                                            
-                                            <option value="1">1</option>
-                                            <option ng-show="{{room.maxvisitor}} > 1" value="2">2</option>
-                                            <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
-                                            <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
-                                        <select>   
-                                        </label>
-                                        <h2>You selected: {{data.adult}}</h2>  
-                                        <h2>Maxvisitor  : {{room.maxvisitor}}</h2>        
-                                        <h2>{{room.maxvisitor-data.adult}}</h2>                                                            
-                        
-                          <label ng-show="{{room.maxvisitor}} > 2" class="item item-input item-select">
-                                <div class="input-label">Child</div>
-                            <select name="child" ng-model="data.child">
-                                <option value="0" >0</option>
-                                <option ng-show="{{room.maxvisitor}} === 2"value="1">1</option>
-                                <option ng-show="{{room.maxvisitor}} === 5" value="2">2</option>
-                                <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
-                                <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
-                            </select>
-                        </label>
-                        <p>summan : {{data.adult + data.child}}  </p>
-
-                          <!--<label class="item item-input item-stacked-label">
-                                <span class="input-label">totalprice</span>
-                          <input class="date" type="number"  name="totalprice" ng-model="data.totalprice" required>
-                        </label>-->
-                          
-                          <input type="submit" value="Book" class="button button-block button-positive">
-                          
-                        </form>
+                    <label class="item item-input item-select">
+                        <div class="input-label">Adult</div>
 
 
-                        
-                        
-                        
-              </ion-item>
-           
-</ion-content>
+                        <select name="adult" ng-model="data.adult">
+
+                            <option value="1" >1</option>
+                            <option ng-show="{{room.maxvisitor}} > 1" value="2">2</option>
+                            <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
+                            <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
+                            <select>
+
+                    </label>
+                    <h2>You selected: {{data.adult}}</h2>
+                    <h2>Maxvisitor : {{room.maxvisitor}}</h2>
+                    <h2>{{room.maxvisitor-data.adult}}</h2>
+                    <h2>{{maxChild(room.maxvisitor, data.adult)}}</h2>
+                    <h2>{{childToReturn}}</h2>
+
+                    <label  ng-show="{{room.maxvisitor}} > 1" class="item item-input item-select">
+                        <div class="input-label">Child</div>
+                     <select name="child" ng-model="data.child">
+                            <option value="0">0</option>
+                            <option ng-show="{{room.maxvisitor}} > 1" value="1">1</option>
+                            <option ng-show="{{room.maxvisitor}} === 5" value="2">2</option>
+                            <option ng-show="{{room.maxvisitor}} === 5" value="3">3</option>
+                            <option ng-show="{{room.maxvisitor}} === 5" value="4">4</option>
+                        </select>
+                    </label>
+                    <p>summan : {{data.adult + data.child}} </p>
+
+                    <input type="submit" value="Book" class="button button-block button-positive">
+
+                </form>
+            </ion-item>
+    </ion-content>
 </ion-view>

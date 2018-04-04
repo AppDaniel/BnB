@@ -10,10 +10,11 @@
 
   .branding{
     width: 50%;
-    max-width: 200px;
+    max-width: 400px;
     margin: 0 auto;
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 80px;
+    margin-left: 50px;
+    
   }
   .error{
     color: red;

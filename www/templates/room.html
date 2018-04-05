@@ -72,7 +72,7 @@
                     <h2>{{maxChild(room.maxvisitor, data.adult)}}</h2>
                     <h2>{{childToReturn}}</h2>-->
 
-                    <label  ng-show="{{room.maxvisitor}} > 2" class="item item-input item-select">
+                   <!-- <label  ng-show="{{room.maxvisitor}} > 2" class="item item-input item-select">
                         <div class="input-label">Child</div>
                      <select name="child" ng-model="data.child">
                             <option name="child" value="0">0</option>
@@ -80,8 +80,19 @@
                             <option name="child" ng-show="{{room.maxvisitor}} > 2" value="2">2</option>
                             <option name="child" ng-show="{{room.maxvisitor}} > 2" value="3">3</option>
                         </select>
-                    </label>
-                    
+                    </label>-->
+
+                    <label  ng-show="{{room.maxvisitor}} > 1" class="item item-input item-select">
+                                             <div class="input-label">Child</div>
+                                             <select name="child" ng-model="data.child">
+                                                    <option name="child" ng-show="{{room.maxvisitor}} === 2" value={{(room.maxvisitor-data.adult)}}>{{(room.maxvisitor-data.adult)}}</option>
+                                                    <option name="child" ng-show="{{room.maxvisitor}} === 5"value={{(room.maxvisitor-data.adult)-3}}>{{(room.maxvisitor-data.adult)-3}}</option>
+                                                    <option name="child" ng-show="{{room.maxvisitor}} === 5" value={{(room.maxvisitor-data.adult)-2}}>{{(room.maxvisitor-data.adult)-2}}</option>
+                                                    <option name="child" ng-show="{{room.maxvisitor}} === 5" value={{(room.maxvisitor-data.adult)-1}}>{{(room.maxvisitor-data.adult)-1}}</option>
+                                                    <option name="child" ng-show="{{room.maxvisitor}} === 5" value={{room.maxvisitor-data.adult}}>{{room.maxvisitor-data.adult}}</option>
+                                                </select>
+                                                </label>
+                        
 
                     <input ng-hide="myForm.$invalid" ng-click="modal.show()"type="submit" value="Book" 
                     class="button button-block button-positive">
